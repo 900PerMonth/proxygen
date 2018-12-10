@@ -57,12 +57,12 @@ AC_CHECK_LIB([event], [event_set], [], [AC_MSG_ERROR([Unable to find libevent])]
 AC_CHECK_LIB([crypto], [MD5_Init], [], [AC_MSG_ERROR([Unable to find libcrypto])])
 AC_CHECK_LIB([ssl], [SSL_SESSION_new], [], [AC_MSG_ERROR([Unable to find libssl])])
 AC_CHECK_LIB([z], [gzread], [], [AC_MSG_ERROR([Unable to find zlib])])
-AC_CHECK_LIB([folly],[getenv],[],[AC_MSG_ERROR(
-             [Please install the folly library from https://github.com/facebook/folly])])
-AC_CHECK_LIB([fizz],[getenv],[],[AC_MSG_ERROR(
-              [Please install the fizz library from https://github.com/facebookincubator/fizz])])
-AC_CHECK_LIB([wangle], [getenv], [], [AC_MSG_ERROR(
-             [Please install the wangle library from https://github.com/facebook/wangle])])
+#AC_CHECK_LIB([folly],[getenv],[],[AC_MSG_ERROR(
+#             [Please install the folly library from https://github.com/facebook/folly])])
+#AC_CHECK_LIB([fizz],[getenv],[],[AC_MSG_ERROR(
+#              [Please install the fizz library from https://github.com/facebookincubator/fizz])])
+#AC_CHECK_LIB([wangle], [getenv], [], [AC_MSG_ERROR(
+#             [Please install the wangle library from https://github.com/facebook/wangle])])
 AC_CHECK_HEADER([folly/Likely.h], [], [AC_MSG_ERROR(
 [Couldn't find folly, please download from https://github.com/facebook/folly]
 )], [])
@@ -208,7 +208,7 @@ if test x"$HAVE_GPERF" != x"yes"; then
 fi
 
 LIBS="$LIBS $BOOST_LDFLAGS -lpthread -pthread -lfolly -lglog"
-LIBS="$LIBS -ldouble-conversion -lboost_system -lboost_thread"
+LIBS="$LIBS -ldouble-conversion -lboost_system -lboost_thread -ldl -liberty -lwangle -lfizz -lsodium"
 
 AM_CONDITIONAL([HAVE_STD_THREAD], [test "$ac_cv_header_features" = "yes"])
 AM_CONDITIONAL([HAVE_X86_64], [test "$build_cpu" = "x86_64"])
